@@ -901,8 +901,7 @@ public class ControlPanel extends javax.swing.JPanel
     // End of variables declaration//GEN-END:variables
 
     private AngledAcceleration getAngledAcceleration() {
-        GameEngine ge = GameEngine.getInstance();
-        return (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
+        return (AngledAcceleration) GameEngine.getInstance().getCharacters().get("Boat").getMoveBehaviour();
     }
     
     private void sldFrictionChange() {
@@ -1001,7 +1000,7 @@ public class ControlPanel extends javax.swing.JPanel
 
     public void updateControlPanel(Boat boat) {
 
-        AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
+        AngledAcceleration mb = (AngledAcceleration) boat.getMoveBehaviour();
 
         //location
         this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
