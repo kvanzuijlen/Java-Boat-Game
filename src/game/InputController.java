@@ -69,7 +69,6 @@ public class InputController {
     }
 
     /** Handles incoming user input
-    @param evt - a KeyEvent describing which Key was pressed
      */
     public Control getPressedControl() {
         if (pressedControls.size() > 0) {
