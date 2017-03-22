@@ -179,14 +179,6 @@ public class Util {
         return 20;
     }
 
-    static int getMinimumNumberOfObstacles() {
-        return 50;
-    }
-
-    static int getMaxiumNumberOfObstacles() {
-        return 60;
-    }
-
     /**
      * Creates a new instance of Util
      */

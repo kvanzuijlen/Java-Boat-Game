@@ -51,6 +51,14 @@ public class GameEngine implements Runnable {
         return gameEngine;
     }
 
+    private static int getMinimumNumberOfObstacles() {
+        return 50;
+    }
+
+    private static int getMaxiumNumberOfObstacles() {
+        return 60;
+    }
+
     private Factory factory() {
         if (this.characterFactory == null) {
             this.characterFactory = new Factory();
@@ -74,8 +82,8 @@ public class GameEngine implements Runnable {
     private void setupObstacles() {
         Character obstacle;
 
-        int min = Util.getMinimumNumberOfObstacles();
-        int max = Util.getMaxiumNumberOfObstacles();
+        int min = getMinimumNumberOfObstacles();
+        int max = getMaxiumNumberOfObstacles();
         int numberOfObstacles = (int) (Math.random() * (max - min));
         for (int x = 0; x
                 < numberOfObstacles + 1; x++) {
