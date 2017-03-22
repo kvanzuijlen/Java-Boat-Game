@@ -13,6 +13,6 @@
         <jar href="Game.jar" main="true" download="eager"/>
         <jar href="lib/AbsoluteLayout.jar" download="eager"/>
     </resources>
-    <application-desc main-class="game.GameWindow">
+    <application-desc main-class="GameWindow">
     </application-desc>
 </jnlp>
