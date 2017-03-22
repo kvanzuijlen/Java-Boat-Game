@@ -42,7 +42,7 @@ public class Factory {
     }
 
     private Boat createBoat() {
-        Boat boat = new Boat();
+        Boat boat = new BoatBuilder().createBoat();
         Renderer renderer = Renderer.getInstance();
 
         int x = 10;
