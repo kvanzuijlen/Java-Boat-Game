@@ -16,7 +16,7 @@ import java.awt.geom.GeneralPath;
 
 public class Factory {
 
-    public Factory() {
+    private Factory() {
     }
 
     private static Area createAreaFromLocations(Location[] locations, GeneralPath generalPath) {
@@ -39,6 +39,10 @@ public class Factory {
 
 
         return area;
+    }
+
+    public static Factory createFactory() {
+        return new Factory();
     }
 
     private Boat createBoat() {

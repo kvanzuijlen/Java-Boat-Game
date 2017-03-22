@@ -61,7 +61,7 @@ public class GameEngine implements Runnable {
 
     private Factory factory() {
         if (this.characterFactory == null) {
-            this.characterFactory = new Factory();
+            this.characterFactory = Factory.createFactory();
         }
 
         return this.characterFactory;
