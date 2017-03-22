@@ -93,11 +93,11 @@ public class InputController {
     }
 
     public boolean keyPressEventsPending() {
+        boolean pressedControlsMoreThanZero = false;
         if (this.pressedControls.size() > 0) {
-            return true;
-        } else {
-            return false;
+            pressedControlsMoreThanZero = true;
         }
+        return pressedControlsMoreThanZero;
     }
 
     public boolean keyHeldEventsPending() {
