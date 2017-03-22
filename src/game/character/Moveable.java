@@ -103,4 +103,6 @@ public abstract class Moveable extends Character
         }
     }
 
+    public void collide(Character c) {
+    }
 }

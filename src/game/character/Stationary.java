@@ -17,5 +17,7 @@ public class Stationary extends Character
     public void update()
     {
     }
-    
+
+    public void collide(Character c) {
+    }
 }

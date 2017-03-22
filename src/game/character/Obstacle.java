@@ -36,6 +36,8 @@ public class Obstacle extends Character
     public void collide()
     {
     }
-    
+
+    public void collide(Character c) {
+    }
 }
 

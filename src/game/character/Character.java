@@ -105,9 +105,6 @@ public abstract class Character {
         return sprite.getTransformedArea();
     }
 
-    public void collide(Character c) {
-    }
-
     /**
      *
      * @param data an ArrayList<CharacterBase> used to check for collisions
