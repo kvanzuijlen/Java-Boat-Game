@@ -173,4 +173,6 @@ public abstract class Character {
             this.myLocation.setLocation(x, y);
         }
     }
+
+    public abstract String onzin ();
 }

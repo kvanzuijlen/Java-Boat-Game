@@ -49,29 +49,29 @@ public class Factory {
         int y = Renderer.getInstance().getHeight() - 30;
         Location location = new Location(x, y);
 
-        boat.setLocation(location);
+        boat.getMoveable().setLocation(location);
 
         Image[] boatImages = new Image[2];
         boatImages[0] = Util.imageResources.get("BOAT");
         boatImages[1] = Util.imageResources.get("BOAT_EXPLODE");
 
-        SpriteImage boatSprite = new SpriteImage(boatImages, boat);
+        SpriteImage boatSprite = new SpriteImage(boatImages, boat.getMoveable());
 
-        game.movement.Location l = boat.getLocation();
+        game.movement.Location l = boat.getMoveable().getLocation();
         boatSprite.setTransformation(x, y, Util.getBoatArea(boatImages[0]));
 
 
-        boat.setLocation(new Location(30, renderer.getHeight()));
+        boat.getMoveable().setLocation(new Location(30, renderer.getHeight()));
 
 
 
-        boat.setSprite(boatSprite);
+        boat.getMoveable().setSprite(boatSprite);
 
         Movement move = Util.getBoatMovePresets();
 
         //Add a swaying motion to the boat
-        Movement m = new Swaying((AngledAcceleration) move, new SwayParams(0, 0, Math.random(), boat, 0.2, 0.3));
-        boat.setMoveBehaviour(m);
+        Movement m = new Swaying((AngledAcceleration) move, new SwayParams(0, 0, Math.random(), boat.getMoveable(), 0.2, 0.3));
+        boat.getMoveable().setMoveBehaviour(m);
         return boat;
     }
 
@@ -82,7 +82,7 @@ public class Factory {
 
         Renderer renderer = Renderer.getInstance();
 
-        computerBoat.setLocation(
+        computerBoat.getMoveable().setLocation(
                 Math.random() * renderer.getWidth(),
                 Math.random() * renderer.getHeight());
 
@@ -93,7 +93,7 @@ public class Factory {
         boatImages[1] = Util.imageResources.get("BOAT_EXPLODE");
 
 
-        SpriteImage computerBoatSprite = new SpriteImage(boatImages, computerBoat);
+        SpriteImage computerBoatSprite = new SpriteImage(boatImages, computerBoat.getMoveable());
         computerBoatSprite.setShowSprite(true);
 
         
@@ -101,10 +101,10 @@ public class Factory {
         int y = 400;
 
         computerBoatSprite.setTransformation(x, y, Util.getBoatArea(boatImages[0]));
-        computerBoat.setSprite(computerBoatSprite);
+        computerBoat.getMoveable().setSprite(computerBoatSprite);
 
         Movement computerBoatMove = Util.angledAccelerationPresets();
-        computerBoat.setMoveBehaviour(computerBoatMove);
+        computerBoat.getMoveable().setMoveBehaviour(computerBoatMove);
 
         return computerBoat;
     }
@@ -272,10 +272,10 @@ public class Factory {
         Character character = null;
         switch (type) {
             case "BOAT":
-                character = createBoat();
+                character = createBoat().getMoveable();
                 break;
             case "COMPUTER_BOAT":
-                character = createComputerBoat();
+                character = createComputerBoat().getMoveable();
                 break;
             case "HARBOUR":
                 character = createHarbour();

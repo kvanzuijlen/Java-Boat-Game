@@ -1000,11 +1000,11 @@ public class ControlPanel extends javax.swing.JPanel
 
     public void updateControlPanel(Boat boat) {
 
-        AngledAcceleration mb = new BoatBehaviour(boat).getBehaviour();
+        AngledAcceleration mb = new BoatBehaviour(boat.getMoveable()).getBehaviour();
 
         //location
-        this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
-        this.jLblY.setText(String.valueOf((int)boat.getLocation().getY()));
+        this.jLblX.setText(String.valueOf((int) boat.getMoveable().getLocation().getX()));
+        this.jLblY.setText(String.valueOf((int) boat.getMoveable().getLocation().getY()));
 
         //velocity
         this.jLblVelocity.setText(String.valueOf(mb.getVelocity()));

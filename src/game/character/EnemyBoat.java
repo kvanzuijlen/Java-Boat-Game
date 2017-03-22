@@ -8,8 +8,9 @@ import java.awt.geom.*;
  *
  * @author Mark
  */
-public class EnemyBoat extends Moveable
-{
+public class EnemyBoat {
+
+    private final MyMoveable moveable = new MyMoveable();
 
     /** Creates a new instance of CharacterComputerBoat */
     public EnemyBoat()
@@ -21,86 +22,98 @@ public class EnemyBoat extends Moveable
     boolean changeDirection = false;
     int i;
 
-    @Override
-    public void update()
-    {
-        if (changeDirection)
-        {
-            turnDuration--;
+    protected String onzin() {
+        return "onzin";
+    };
 
-            switch (i)
-            {
-                case 0:
-                    setLocation(getMoveBehaviour().goRight(getLocation()));
-                    break;
-                case 1:
-                    setLocation(getMoveBehaviour().goLeft(getLocation()));
-                    break;
-                default:
-                    setLocation(getMoveBehaviour().goUp(getLocation()));
-                    break;
-            }
-            if (turnDuration <= 0)
-            {
-                turnDuration = 15;
-                i = (int) (2 * Math.random());
-                changeDirection = false;
-            }
-        }
-        else
-        {
-            randomLength--;
-            setLocation(getMoveBehaviour().goUp(getLocation()));
-
-            if (randomLength <= 0)
-            {
-                randomLength = (int) (Math.random() * 50);
-                changeDirection = true;
-
-            }
-
-        }
-
-        setLocation(getMoveBehaviour().go(getLocation()));
-
-
-        Rectangle2D b = this.getSprite().getUntransformedArea().getBounds2D();
-        setTransform(new Location(b.getCenterX(), b.getCenterY()));
-        if (checkScreenEdge())
-        {
-            getMoveBehaviour().setAngle(Math.PI + this.getMoveBehaviour().getAngle());
-        }
+    public Moveable getMoveable() {
+        return moveable;
     }
 
-    
 
-
-    @Override
-    public void collide()
-    {
-        Movement m = getMoveBehaviour();
-//		m.setAngle(Math.random() + m.getAngle());
-        m.setVelocity(m.getVelocity() * 0.99);
-        double random = Math.random();
-        if (random > 0.5)
+    private class MyMoveable extends Moveable {
+        @Override
+        public void update()
         {
-            for (int x = 1; x < 10; x++)
+            if (changeDirection)
             {
-                setLocation(m.goRight(getLocation()));
+                turnDuration--;
+
+                switch (i)
+                {
+                    case 0:
+                        setLocation(getMoveBehaviour().goRight(getLocation()));
+                        break;
+                    case 1:
+                        setLocation(getMoveBehaviour().goLeft(getLocation()));
+                        break;
+                    default:
+                        setLocation(getMoveBehaviour().goUp(getLocation()));
+                        break;
+                }
+                if (turnDuration <= 0)
+                {
+                    turnDuration = 15;
+                    i = (int) (2 * Math.random());
+                    changeDirection = false;
+                }
+            }
+            else
+            {
+                randomLength--;
+                setLocation(getMoveBehaviour().goUp(getLocation()));
+
+                if (randomLength <= 0)
+                {
+                    randomLength = (int) (Math.random() * 50);
+                    changeDirection = true;
+
+                }
+
             }
 
-        }
-        else
-        {
-            for (int x = 1; x < 10; x++)
-            {
-                setLocation(m.goLeft(getLocation()));
-            }
+            setLocation(getMoveBehaviour().go(getLocation()));
 
+
+            Rectangle2D b = this.getSprite().getUntransformedArea().getBounds2D();
+            setTransform(new Location(b.getCenterX(), b.getCenterY()));
+            if (checkScreenEdge())
+            {
+                getMoveBehaviour().setAngle(Math.PI + this.getMoveBehaviour().getAngle());
+            }
         }
-        for (int x = 1; x < 3; x++)
+
+        @Override
+        public void collide()
         {
-            setLocation(m.goUp(getLocation()));
+            Movement m = getMoveBehaviour();
+    //		m.setAngle(Math.random() + m.getAngle());
+            m.setVelocity(m.getVelocity() * 0.99);
+            double random = Math.random();
+            if (random > 0.5)
+            {
+                for (int x = 1; x < 10; x++)
+                {
+                    setLocation(m.goRight(getLocation()));
+                }
+
+            }
+            else
+            {
+                for (int x = 1; x < 10; x++)
+                {
+                    setLocation(m.goLeft(getLocation()));
+                }
+
+            }
+            for (int x = 1; x < 3; x++)
+            {
+                setLocation(m.goUp(getLocation()));
+            }
+        }
+
+        public String onzin() {
+            return EnemyBoat.this.onzin();
         }
     }
 }

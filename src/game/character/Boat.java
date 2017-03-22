@@ -9,13 +9,14 @@ import game.sprite.Sprite;
 import game.Util;
 import java.awt.geom.*;
 
-public class Boat extends Moveable {
+public class Boat {
 
+    private final MyMoveable moveable = new MyMoveable();
     Location pivotPoint;
     private int energy = 100;
 
     public void setEnergy(int energy) {
-        this.energy = energy;
+        Boat.this.energy = energy;
     }
 
     public int getEnergy() {
@@ -59,43 +60,43 @@ public class Boat extends Moveable {
     }
 
     private void processMouse() {
-        Point2D p = this.getController().getMouseLocation();
+        Point2D p = moveable.getController().getMouseLocation();
 
         Location dest = new Location(p.getX(), p.getY());
 
-        double dy = dest.getY() - y();
-        double dx = dest.getX() - x();
+        double dy = dest.getY() - moveable.y();
+        double dx = dest.getX() - moveable.x();
 
         double destinationAngle = Math.atan2(dy, dx);
 
-        AngledAcceleration m = (AngledAcceleration) getMoveBehaviour();
+        AngledAcceleration m = (AngledAcceleration) moveable.getMoveBehaviour();
         double angleDelta = destinationAngle - m.getAngle();
 
         angleDelta = pinAngle(angleDelta);
         
         if (Math.abs(angleDelta) < (Math.PI / 2.0)) {
             if ((angleDelta < Math.PI) && (angleDelta > 0)) {
-                setLocation(m.goRight(getLocation()));
+                moveable.setLocation(m.goRight(moveable.getLocation()));
             }
 
             if ((angleDelta < 0) && (angleDelta > -Math.PI)) {
-                setLocation(m.goLeft(getLocation()));
+                moveable.setLocation(m.goLeft(moveable.getLocation()));
             }
             //accelerate
-            setLocation(m.goUp(getLocation()));
+            moveable.setLocation(m.goUp(moveable.getLocation()));
         } else {
             m.setVelocity(m.getVelocity() * 0.95);
 
             if ((angleDelta > 0)) {
 
-                setLocation(m.goRight(getLocation()));
+                moveable.setLocation(m.goRight(moveable.getLocation()));
             }
 
             if ((angleDelta < 0)) {
-                setLocation(m.goLeft(getLocation()));
+                moveable.setLocation(m.goLeft(moveable.getLocation()));
             }
         }
-        setLocation(m.goUp(getLocation()));
+        moveable.setLocation(m.goUp(moveable.getLocation()));
     }
 
     private void processKeyPressSquare(InputController.Control keypress) {
@@ -109,19 +110,19 @@ public class Boat extends Moveable {
     private void handleKeyPress(InputController.Control keypress) {
         switch (keypress) {
             case UP:
-                setLocation(getMoveBehaviour().goUp(getLocation()));
+                moveable.setLocation(moveable.getMoveBehaviour().goUp(moveable.getLocation()));
                 break;
             case DOWN:
-                setLocation(getMoveBehaviour().goDown(getLocation()));
+                moveable.setLocation(moveable.getMoveBehaviour().goDown(moveable.getLocation()));
                 break;
             case LEFT:
-                setLocation(getMoveBehaviour().goLeft(getLocation()));
+                moveable.setLocation(moveable.getMoveBehaviour().goLeft(moveable.getLocation()));
                 break;
             case RIGHT:
-                setLocation(getMoveBehaviour().goRight(getLocation()));
+                moveable.setLocation(moveable.getMoveBehaviour().goRight(moveable.getLocation()));
                 break;
             case BRAKE:
-                setLocation(getMoveBehaviour().brake(getLocation()));
+                moveable.setLocation(moveable.getMoveBehaviour().brake(moveable.getLocation()));
                 break;
             case STORM:
                 break;
@@ -134,43 +135,57 @@ public class Boat extends Moveable {
         }
     }
 
-    @Override
-    public void update() {
-        InputController controller = getController();
-        if (controller.keyPressEventsPending()) {
-            InputController.Control pressedControl = controller.getPressedControl();
-            processKeyPressRotating(pressedControl);
+    protected String onzin() {
+        return "onzin";
+    };
 
-        } else {
-            setLocation(getMoveBehaviour().go(getLocation()));
-        }
-
-        if (controller.keyHeldEventsPending()) {
-            int count = 0;
-            while (count <= controller.getNumberOfHeldControls()) {
-                InputController.Control c = controller.getHeldControl(count);
-                processKeyPressRotating(c);
-                count++;
-            }
-        }
-
-        if (controller.isMouseHeld()) {
-            processMouse();
-        }
-
-        setTransform(pivotPoint);
-
-        if (checkScreenEdge()) {
-            this.getMoveBehaviour().setVelocity(getMoveBehaviour().getVelocity() / 10);
-        }
-
-        GameWindow.getInstance()
-                .updateControlPanel(this);
+    public Moveable getMoveable() {
+        return moveable;
     }
 
-    @Override
-    public void setSprite(Sprite sprite) {
-        super.setSprite(sprite);
-        pivotPoint = Util.getBoatPivotPoint(sprite);
+    private class MyMoveable extends Moveable {
+        @Override
+        public void update() {
+            InputController controller = getController();
+            if (controller.keyPressEventsPending()) {
+                InputController.Control pressedControl = controller.getPressedControl();
+                processKeyPressRotating(pressedControl);
+
+            } else {
+                setLocation(getMoveBehaviour().go(getLocation()));
+            }
+
+            if (controller.keyHeldEventsPending()) {
+                int count = 0;
+                while (count <= controller.getNumberOfHeldControls()) {
+                    InputController.Control c = controller.getHeldControl(count);
+                    processKeyPressRotating(c);
+                    count++;
+                }
+            }
+
+            if (controller.isMouseHeld()) {
+                processMouse();
+            }
+
+            setTransform(pivotPoint);
+
+            if (checkScreenEdge()) {
+                this.getMoveBehaviour().setVelocity(getMoveBehaviour().getVelocity() / 10);
+            }
+
+            GameWindow.getInstance()
+                    .updateControlPanel(Boat.this);
+        }
+
+        @Override
+        public void setSprite(Sprite sprite) {
+            super.setSprite(sprite);
+            pivotPoint = Util.getBoatPivotPoint(sprite);
+        }
+
+        public String onzin() {
+            return Boat.this.onzin();
+        }
     }
 }
