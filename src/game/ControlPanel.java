@@ -901,7 +901,7 @@ public class ControlPanel extends javax.swing.JPanel
     // End of variables declaration//GEN-END:variables
 
     private AngledAcceleration getAngledAcceleration() {
-        return (AngledAcceleration) GameEngine.getInstance().getCharacters().get("Boat").getMoveBehaviour();
+        return new BoatBehaviour(GameEngine.getInstance().getCharacters().get("Boat")).getBehaviour();
     }
     
     private void sldFrictionChange() {
@@ -942,7 +942,7 @@ public class ControlPanel extends javax.swing.JPanel
     }
 
     public void initializeControlPanel(Character boat) {
-        AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
+        AngledAcceleration mb = new BoatBehaviour(boat).getBehaviour();
 
         //location
         this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
@@ -1000,7 +1000,7 @@ public class ControlPanel extends javax.swing.JPanel
 
     public void updateControlPanel(Boat boat) {
 
-        AngledAcceleration mb = (AngledAcceleration) boat.getMoveBehaviour();
+        AngledAcceleration mb = new BoatBehaviour(boat).getBehaviour();
 
         //location
         this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
@@ -1034,5 +1034,17 @@ public class ControlPanel extends javax.swing.JPanel
 
         //Angular Friction
         this.jLblAngularFriction.setText(String.valueOf(mb.getAngularFriction()));
+    }
+
+    private class BoatBehaviour {
+        private Character boat;
+
+        public BoatBehaviour(Character boat) {
+            this.boat = boat;
+        }
+
+        public AngledAcceleration getBehaviour() {
+            return (AngledAcceleration)boat.getMoveBehaviour();
+        }
     }
 }
