@@ -22,19 +22,18 @@ public class Factory {
     public Factory() {
     }
 
-    private Area createAreaFromLocations(int[] locations, GeneralPath generalPath) {
+    private Area createAreaFromLocations(Location[] locations, GeneralPath generalPath) {
         int count = 0;
         int x;
         int y;
-        x = locations[count];
-        y = locations[count + 1];
+        x = ((int) locations[count].getX());
+        y = ((int) locations[count].getY());
         generalPath.moveTo(x, y);
-        count += 2;
+        count++;
         while (count < locations.length) {
-
-            x = locations[count];
-            y = locations[count + 1];
-            count += 2;
+            x = ((int) locations[count].getX());
+            y = ((int) locations[count].getY());
+            count++;
             generalPath.lineTo(x, y);
         }
         generalPath.closePath();
@@ -125,7 +124,7 @@ public class Factory {
         GeneralPath generalPath = new GeneralPath();
 
 
-        int[] locations = Util.getHarbourData();
+        Location[] locations = Util.getHarbourData();
         Area area = createAreaFromLocations(locations, generalPath);
 
 
@@ -158,7 +157,7 @@ public class Factory {
 
         GeneralPath generalPath = new GeneralPath();
         island.setLocation(new Location(0, 0));
-        int[] locations = Util.getIslandData();
+        Location[] locations = Util.getIslandData();
         Area area = createAreaFromLocations(locations, generalPath);
 
         islandSprite.setUntransformedArea(area);

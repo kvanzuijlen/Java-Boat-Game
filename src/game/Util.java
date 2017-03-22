@@ -129,32 +129,49 @@ public class Util {
         return boatMove;
     }
 
-    public static int[] getIslandData() {
+    public static Location[] getIslandData() {
 
-        int[] i = {167, 198,
-            221, 248,
-            218, 312,
-            211, 366,
-            191, 440,
-            184, 500,
-            195, 558,
-            230, 558,
-            224, 499,
-            282, 377,
-            319, 269,
-            399, 240,
-            395, 188,
-            361, 140,
-            306, 108,
-            233, 132,
-            181, 158,
-            164, 192};
+        Location[] i = {
+                new Location(167, 198),
+                new Location(221, 248),
+                new Location(218, 312),
+                new Location(211, 366),
+                new Location(191, 440),
+                new Location(184, 500),
+                new Location(195, 558),
+                new Location(230, 558),
+                new Location(224, 499),
+                new Location(282, 377),
+                new Location(319, 269),
+                new Location(399, 240),
+                new Location(395, 188),
+                new Location(361, 140),
+                new Location(306, 108),
+                new Location(233, 132),
+                new Location(181, 158),
+                new Location(164, 192)
+        };
         return i;
     }
 
-    public static int[] getHarbourData() {
+    public static Location[] getHarbourData() {
 
-        int[] i = {550, 2, 561, 54, 569, 77, 552, 137, 540, 148, 558, 175, 615, 225, 610, 260, 625, 380, 618, 461, 605, 483, 676, 484, 673, 0, 555, 1};
+        Location[] i = {
+                new Location(550, 2),
+                new Location(561, 54),
+                new Location(569, 77),
+                new Location(552, 137),
+                new Location(540, 148),
+                new Location(558, 175),
+                new Location(615, 225),
+                new Location(610, 260),
+                new Location(625, 380),
+                new Location(618, 461),
+                new Location(605, 483),
+                new Location(676, 484),
+                new Location(673, 0),
+                new Location(555, 1)
+        };
         return i;
     }
 
