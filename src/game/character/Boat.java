@@ -94,49 +94,19 @@ public class Boat extends Moveable {
             if ((angleDelta < 0)) {
                 setLocation(m.goLeft(getLocation()));
             }
-
         }
-
-
-
         setLocation(m.goUp(getLocation()));
-
-
     }
 
     private void processKeyPressSquare(InputController.Control keypress) {
-        switch (keypress) {
-            case UP:
-                setLocation(getMoveBehaviour().goUp(getLocation()));
-
-                break;
-            case DOWN:
-                setLocation(getMoveBehaviour().goDown(getLocation()));
-                break;
-            case LEFT:
-                setLocation(getMoveBehaviour().goLeft(getLocation()));
-                break;
-            case RIGHT:
-                setLocation(getMoveBehaviour().goRight(getLocation()));
-                break;
-            case BRAKE:
-                setLocation(getMoveBehaviour().brake(getLocation()));
-                break;
-            case STORM:
-                break;
-            case PAUSE: //don't update
-//		GameEngine.getInstance().togglePause();
-                break;
-            default:
-
-                //do nothing
-                break;
-        }
-
+        handleKeyPress(keypress);
     }
 
     private void processKeyPressRotating(InputController.Control keypress) {
+        handleKeyPress(keypress);
+    }
 
+    private void handleKeyPress(InputController.Control keypress) {
         switch (keypress) {
             case UP:
                 setLocation(getMoveBehaviour().goUp(getLocation()));
@@ -156,14 +126,12 @@ public class Boat extends Moveable {
             case STORM:
                 break;
             case PAUSE: //don't update
-//		GameEngine.getInstance().togglePause();
+                //GameEngine.getInstance().togglePause();
                 break;
             default:
-
                 //do nothing
                 break;
         }
-
     }
 
     @Override
