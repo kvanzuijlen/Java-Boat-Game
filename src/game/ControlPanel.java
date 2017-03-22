@@ -899,173 +899,141 @@ public class ControlPanel extends javax.swing.JPanel
     private javax.swing.JSlider sldBrake;
     private javax.swing.JSlider sldFriction;
     // End of variables declaration//GEN-END:variables
-    
-    private void sldFrictionChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setFriction((this.sldFriction.getValue()*(this.frictionScale/this.SLIDER_MAXIMUM)));
-	
-	
+
+    private AngledAcceleration getAngledAcceleration() {
+        GameEngine ge = GameEngine.getInstance();
+        return (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
     }
     
-    private void sldBrakeChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setBrake(this.sldBrake.getValue()*(this.brakeScale/this.SLIDER_MAXIMUM));
-	
+    private void sldFrictionChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setFriction((this.sldFriction.getValue()*(this.frictionScale/this.SLIDER_MAXIMUM)));
+    }
+
+    private void sldBrakeChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setBrake(this.sldBrake.getValue()*(this.brakeScale/this.SLIDER_MAXIMUM));
     }
     
-    private void sldAccelerationChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setAcceleration(
-		(this.jSldAcceleration.getValue()*(this.accelerationScale/this.SLIDER_MAXIMUM)));
+    private void sldAccelerationChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setAcceleration((this.jSldAcceleration.getValue()*(this.accelerationScale/this.SLIDER_MAXIMUM)));
     }
     
-    private void sldMaximumVelocityChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setMaxVelocity(
-		(this.jSldScaleMaximumVelocity.getValue()*(this.maxVelocityScale/this.SLIDER_MAXIMUM)));
-	
+    private void sldMaximumVelocityChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setMaxVelocity((this.jSldScaleMaximumVelocity.getValue()*(this.maxVelocityScale/this.SLIDER_MAXIMUM)));
     }
     
     
-    private void sldAngularAccelerationChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setAngularAcceleration(
-		(this.jSldAngularAcceleration.getValue()*this.angAccelerationScale/this.SLIDER_MAXIMUM));
-	
+    private void sldAngularAccelerationChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setAngularAcceleration((this.jSldAngularAcceleration.getValue()*this.angAccelerationScale/this.SLIDER_MAXIMUM));
     }
     
     
-    private void sldMaximumAngularVelocityChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setAngularMaxVelocity(
-		(this.jSldMaximumAngularVelocity.getValue()*(this.maxAngularVelocityScale/this.SLIDER_MAXIMUM)));
-	
+    private void sldMaximumAngularVelocityChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setAngularMaxVelocity((this.jSldMaximumAngularVelocity.getValue()*(this.maxAngularVelocityScale/this.SLIDER_MAXIMUM)));
     }
     
-    private void sldAngularFrictionChange()
-    {
-	GameEngine ge = GameEngine.getInstance();
-	AngledAcceleration mb = (AngledAcceleration)ge.getCharacters().get("Boat").getMoveBehaviour();
-	mb.setAngularFriction(
-		(this.jSldAngularFriction.getValue()*(this.angularFrictionScale/this.SLIDER_MAXIMUM)));
+    private void sldAngularFrictionChange() {
+        AngledAcceleration mb = getAngledAcceleration();
+	    mb.setAngularFriction((this.jSldAngularFriction.getValue()*(this.angularFrictionScale/this.SLIDER_MAXIMUM)));
     }
-    
-    public void initializeControlPanel(Character boat)
-    {
-	
-	AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
-	
-	//location
-	this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
-	this.jLblY.setText(String.valueOf((int)boat.getLocation().getY()));
-	
-	//velocity
-	this.jLblVelocity.setText(String.valueOf(mb.getVelocity()));
-	
-	//angle
-	this.jLblAngle.setText(String.valueOf(mb.getAngle()));
-	
-	//aceleration
-	this.jLblAcceleration.setText(String.valueOf(mb.getAcceleration()));
-	this.jSldAcceleration.setValue((int)(mb.getAcceleration()
-		*(this.SLIDER_MAXIMUM/this.accelerationScale)));
-	this.jTxtScaleAcceleration.setText(String.valueOf(this.accelerationScale));
-	
-	//maximum velocity
-	this.jLblMaximumVelocity.setText(String.valueOf(mb.getMaxVelocity()));
-	this.jSldScaleMaximumVelocity.setValue((int)(mb.getMaxVelocity()
-	*(SLIDER_MAXIMUM/this.maxVelocityScale)));
-	this.jTxtScaleMaximumVelocity.setText(String.valueOf(this.maxVelocityScale));
-	
-	//brake
-	this.lblBrakeScale.setText(String.valueOf(mb.getBrake()));
-	this.sldBrake.setValue((int)(mb.getBrake()
-	*(SLIDER_MAXIMUM/this.brakeScale)));
-	this.jTxtBrakingScale.setText(String.valueOf(this.brakeScale));
-	
-	//friction
-	this.lblFrictionScale.setText(String.valueOf(mb.getFriction()));
-	this.sldFriction.setValue((int)(mb.getFriction()
-	*(SLIDER_MAXIMUM/this.frictionScale)));
-	this.jTxtFrictionScale.setText(String.valueOf(this.frictionScale));
-	
-	//angular acceleration
-	this.jLblAngularAcceleration.setText(String.valueOf(mb.getAngularAcceleration()));
-	this.jSldAngularAcceleration.setValue((int)(mb.getAngularAcceleration()
-	*(SLIDER_MAXIMUM/this.angAccelerationScale)));
-	this.jTxtAngAccelerationScale.setText(String.valueOf(this.angAccelerationScale));
-	
-	//max angular velocity
-	this.jLblMaximumAngularVelocity.setText(String.valueOf(mb.getFriction()));
-	this.jSldMaximumAngularVelocity.setValue((int)(mb.getAngularMaxVelocity()
-	*(SLIDER_MAXIMUM/maxAngularVelocityScale)));
-	this.jTxtMaxAngularVelocity.setText(String.valueOf(this.maxAngularVelocityScale));
-	
-	
-	//Angular Friction
-	this.jLblAngularFriction.setText(String.valueOf(mb.getAngularFriction()));
-	this.jSldAngularFriction.setValue((int)(mb.getAngularFriction()
-	*(SLIDER_MAXIMUM/this.angularFrictionScale)));
-	this.jTxtAngularFriction.setText(String.valueOf(this.angularFrictionScale));
-	
+
+    public void initializeControlPanel(Character boat) {
+        AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
+
+        //location
+        this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
+        this.jLblY.setText(String.valueOf((int)boat.getLocation().getY()));
+
+        //velocity
+        this.jLblVelocity.setText(String.valueOf(mb.getVelocity()));
+
+        //angle
+        this.jLblAngle.setText(String.valueOf(mb.getAngle()));
+
+        //aceleration
+        this.jLblAcceleration.setText(String.valueOf(mb.getAcceleration()));
+        this.jSldAcceleration.setValue((int)(mb.getAcceleration()
+                *(this.SLIDER_MAXIMUM/this.accelerationScale)));
+        this.jTxtScaleAcceleration.setText(String.valueOf(this.accelerationScale));
+
+        //maximum velocity
+        this.jLblMaximumVelocity.setText(String.valueOf(mb.getMaxVelocity()));
+        this.jSldScaleMaximumVelocity.setValue((int)(mb.getMaxVelocity()
+                *(SLIDER_MAXIMUM/this.maxVelocityScale)));
+        this.jTxtScaleMaximumVelocity.setText(String.valueOf(this.maxVelocityScale));
+
+        //brake
+        this.lblBrakeScale.setText(String.valueOf(mb.getBrake()));
+        this.sldBrake.setValue((int)(mb.getBrake()
+                *(SLIDER_MAXIMUM/this.brakeScale)));
+        this.jTxtBrakingScale.setText(String.valueOf(this.brakeScale));
+
+        //friction
+        this.lblFrictionScale.setText(String.valueOf(mb.getFriction()));
+        this.sldFriction.setValue((int)(mb.getFriction()
+                *(SLIDER_MAXIMUM/this.frictionScale)));
+        this.jTxtFrictionScale.setText(String.valueOf(this.frictionScale));
+
+        //angular acceleration
+        this.jLblAngularAcceleration.setText(String.valueOf(mb.getAngularAcceleration()));
+        this.jSldAngularAcceleration.setValue((int)(mb.getAngularAcceleration()
+                *(SLIDER_MAXIMUM/this.angAccelerationScale)));
+        this.jTxtAngAccelerationScale.setText(String.valueOf(this.angAccelerationScale));
+
+        //max angular velocity
+        this.jLblMaximumAngularVelocity.setText(String.valueOf(mb.getFriction()));
+        this.jSldMaximumAngularVelocity.setValue((int)(mb.getAngularMaxVelocity()
+                *(SLIDER_MAXIMUM/maxAngularVelocityScale)));
+        this.jTxtMaxAngularVelocity.setText(String.valueOf(this.maxAngularVelocityScale));
+
+        //Angular Friction
+        this.jLblAngularFriction.setText(String.valueOf(mb.getAngularFriction()));
+        this.jSldAngularFriction.setValue((int)(mb.getAngularFriction()
+                *(SLIDER_MAXIMUM/this.angularFrictionScale)));
+        this.jTxtAngularFriction.setText(String.valueOf(this.angularFrictionScale));
+
     }
-    public void updateControlPanel(Boat boat)
-    {
-	
-	AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
-	
-	//location
-	this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
-	this.jLblY.setText(String.valueOf((int)boat.getLocation().getY()));
-	
-	//velocity
-	this.jLblVelocity.setText(String.valueOf(mb.getVelocity()));
-	
-	//angle
-	this.jLblAngle.setText(String.valueOf(mb.getAngle()));
-	
-	//angular velocity
-	this.jLblAngularVelocity.setText(String.valueOf(mb.getAngularVelocity()));
-	//aceleration
-	this.jLblAcceleration.setText(String.valueOf(mb.getAcceleration()));
-	
-	
-	//maximum velocity
-	this.jLblMaximumVelocity.setText(String.valueOf(mb.getMaxVelocity()));
-	
-	
-	
-	//brake
-	this.lblBrakeScale.setText(String.valueOf(mb.getBrake()));
-	
-	
-	//friction
-	this.lblFrictionScale.setText(String.valueOf(mb.getFriction()));
-	
-	
-	//angular acceleration
-	this.jLblAngularAcceleration.setText(String.valueOf(mb.getAngularAcceleration()));
-	
-	
-	//max angular velocity
-	this.jLblMaximumAngularVelocity.setText(String.valueOf(mb.getAngularMaxVelocity()));
-	
-	//Angular Friction
-	this.jLblAngularFriction.setText(String.valueOf(mb.getAngularFriction()));
-	
-	
-	
+
+    public void updateControlPanel(Boat boat) {
+
+        AngledAcceleration mb = (AngledAcceleration )boat.getMoveBehaviour();
+
+        //location
+        this.jLblX.setText(String.valueOf((int)boat.getLocation().getX()));
+        this.jLblY.setText(String.valueOf((int)boat.getLocation().getY()));
+
+        //velocity
+        this.jLblVelocity.setText(String.valueOf(mb.getVelocity()));
+
+        //angle
+        this.jLblAngle.setText(String.valueOf(mb.getAngle()));
+
+        //angular velocity
+        this.jLblAngularVelocity.setText(String.valueOf(mb.getAngularVelocity()));
+        //aceleration
+        this.jLblAcceleration.setText(String.valueOf(mb.getAcceleration()));
+
+        //maximum velocity
+        this.jLblMaximumVelocity.setText(String.valueOf(mb.getMaxVelocity()));
+
+        //brake
+        this.lblBrakeScale.setText(String.valueOf(mb.getBrake()));
+
+        //friction
+        this.lblFrictionScale.setText(String.valueOf(mb.getFriction()));
+
+        //angular acceleration
+        this.jLblAngularAcceleration.setText(String.valueOf(mb.getAngularAcceleration()));
+
+        //max angular velocity
+        this.jLblMaximumAngularVelocity.setText(String.valueOf(mb.getAngularMaxVelocity()));
+
+        //Angular Friction
+        this.jLblAngularFriction.setText(String.valueOf(mb.getAngularFriction()));
     }
 }
