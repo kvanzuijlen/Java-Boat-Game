@@ -19,7 +19,7 @@ public class Factory {
     public Factory() {
     }
 
-    private Area createAreaFromLocations(Location[] locations, GeneralPath generalPath) {
+    private static Area createAreaFromLocations(Location[] locations, GeneralPath generalPath) {
         int count = 0;
         int x;
         int y;
@@ -109,7 +109,7 @@ public class Factory {
         return computerBoat;
     }
 
-    private Harbour createHarbour() {
+    private static Harbour createHarbour() {
 
 
         Renderer renderer = Renderer.getInstance();
@@ -141,7 +141,7 @@ public class Factory {
         return harbour;
     }
 
-    private Island createIsland() {
+    private static Island createIsland() {
 
         GameEngine ge = GameEngine.getInstance();
         Renderer renderer = Renderer.getInstance();
