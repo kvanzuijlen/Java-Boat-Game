@@ -4,17 +4,16 @@ import game.character.Character;
 
 public class Swaying extends AngledAcceleration
 {
-    public Swaying(AngledAcceleration move, double x, double y, double pRandomPhase, Character owner,
-	    double swayH, double swayV)
+    public Swaying(AngledAcceleration move, SwayParams swayParams)
     {
 	this.move = move;
-	this.owner = owner;
-	xAnchor = x;
-	yAnchor = y;
-	this.randomPhase = pRandomPhase;
+	this.owner = swayParams.getOwner();
+	xAnchor = swayParams.getX();
+	yAnchor = swayParams.getY();
+	this.randomPhase = swayParams.getpRandomPhase();
 	phase += randomPhase;
-	this.swaySizeHorizontal= swayH;
-	this.swaySizeVertical= swayV;
+	this.swaySizeHorizontal= swayParams.getSwayH();
+	this.swaySizeVertical= swayParams.getSwayV();
     }
     //Holds instance of superclass (used as a decorator class)
     private AngledAcceleration move;

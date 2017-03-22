@@ -1,10 +1,7 @@
 package game.character;
 
 import game.GameEngine;
-import game.movement.Location;
-import game.movement.Movement;
-import game.movement.AngledAcceleration;
-import game.movement.Swaying;
+import game.movement.*;
 import game.Renderer;
 import game.sprite.Sprite;
 import game.sprite.Buoy;
@@ -73,7 +70,7 @@ public class Factory {
         Movement move = Util.getBoatMovePresets();
 
         //Add a swaying motion to the boat
-        Movement m = new Swaying((AngledAcceleration) move, 0, 0, Math.random(), boat, 0.2, 0.3);
+        Movement m = new Swaying((AngledAcceleration) move, new SwayParams(0, 0, Math.random(), boat, 0.2, 0.3));
         boat.setMoveBehaviour(m);
         return boat;
     }
@@ -195,7 +192,7 @@ public class Factory {
 
         //MoveAngledAccelerate move, double x, double y, double pRandomPhase, CharacterBase owner,
         //double swayH, double swayV)
-        Swaying move = new Swaying(null, 0, 0, Math.random(), octopus, 100.0, 1.0);
+        Swaying move = new Swaying(null, new SwayParams(0, 0, Math.random(), octopus, 100.0, 1.0));
         octopus.setMoveBehaviour(move);
 
         octopusSprite.setUntransformedArea(area);
@@ -250,7 +247,7 @@ public class Factory {
 
         buoy.setLocation(randomX, randomY);
 
-        Movement sway = new game.movement.Swaying(null, randomX, randomY, randomY, buoy, 1, 2);
+        Movement sway = new game.movement.Swaying(null, new SwayParams(randomX, randomY, randomY, buoy, 1, 2));
         buoy.setMoveBehaviour(sway);
         int size = Util.getObstacleSize();
         Area a = new Area(new java.awt.geom.Ellipse2D.Double(randomX - size / 2, randomY - size / 2, size, size));
