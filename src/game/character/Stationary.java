@@ -20,4 +20,8 @@ public class Stationary extends Character
 
     public void collide(Character c) {
     }
+
+    public String onzin() {
+        return "onzin";
+    }
 }

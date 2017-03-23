@@ -39,5 +39,9 @@ public class Obstacle extends Character
 
     public void collide(Character c) {
     }
+
+    public String onzin() {
+        return "onzin";
+    }
 }
 

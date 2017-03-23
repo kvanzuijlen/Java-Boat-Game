@@ -22,11 +22,11 @@ public class Cast extends HashMap<String, Character> {
     }
 
     public boolean boatIsVulnerable() {
-        return ((Boat) cast.get("Boat")).getMoveable().immune == false;
+        return !((Moveable) cast.get("Boat")).immune;
     }
 
     public void setBoatImmune() {
-        ((Boat) cast.get("Boat")).getMoveable().immune = true;
+        ((Moveable) cast.get("Boat")).immune = true;
     }
 
     public ArrayList<Character> getMovingCharacters() {
