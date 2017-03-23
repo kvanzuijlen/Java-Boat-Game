@@ -36,13 +36,13 @@ public abstract class Moveable extends Character
         //if over right side
         if (x > w)
         {
-            getLocation().setX(w - this.getUntransformedArea().getBounds2D().getWidth());
+            getLocation().setX(w - this.getSprite().getUntransformedArea().getBounds2D().getWidth());
             hitEdge = true;
         }
 //if gone over bottom
         if (centreY > h)
         {
-            getLocation().setY(h - this.getUntransformedArea().getBounds2D().getHeight());
+            getLocation().setY(h - this.getSprite().getUntransformedArea().getBounds2D().getHeight());
             hitEdge = true;
         }
 //if gone over left

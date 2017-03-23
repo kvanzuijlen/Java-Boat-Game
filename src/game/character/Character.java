@@ -5,7 +5,7 @@ import game.InputController;
 import game.movement.Location;
 import game.movement.Movement;
 import game.sprite.Sprite;
-import java.awt.Rectangle;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.ArrayList;
@@ -40,11 +40,11 @@ public abstract class Character {
     }
 
     public double getHeight() {
-        return getBounds().getHeight();
+        return sprite.getBounds().getHeight();
     }
 
     public double getWidth() {
-        return getBounds().getWidth();
+        return sprite.getBounds().getWidth();
     }
 
     public void setTransform(Location rotateCentre) {
@@ -74,17 +74,13 @@ public abstract class Character {
 
     public abstract void update();
 
-    public Rectangle getBounds() {
-        return sprite.getBounds();
-    }
-    
     public double x(){
-        return getBounds().getCenterX();
+        return sprite.getBounds().getCenterX();
 
     }
         
     public double y(){
-        return getBounds().getCenterY();
+        return sprite.getBounds().getCenterY();
 
     }
         
@@ -93,16 +89,12 @@ public abstract class Character {
             return false;
         }
 
-        Area intersectArea = new Area(getTransformedArea());
-        Area b = c.getTransformedArea();
+        Area intersectArea = new Area(sprite.getTransformedArea());
+        Area b = c.getSprite().getTransformedArea();
 
         intersectArea.intersect(b);
 
         return !intersectArea.isEmpty();
-    }
-
-    public Area getTransformedArea() {
-        return sprite.getTransformedArea();
     }
 
     /**
@@ -128,14 +120,6 @@ public abstract class Character {
 
     public InputController getController() {
         return controller;
-    }
-
-    public Area getUntransformedArea() {
-        return sprite.getUntransformedArea();
-    }
-
-    public void setUntransformedArea(Area area) {
-        sprite.setUntransformedArea(area);
     }
 
     public void setLocation(Location location) {
